@@ -1,0 +1,41 @@
+// Klo mau pake, pake aja ini bkn enc cma terser aja
+
+// Klo mau pake, pake aja ini bkn enc cma terser aja
+
+import fetch from 'node-fetch'
+
+let handler = async (m, { mufar, command }) => {
+    let url = 'https://api.waifu.im/search?included_tags=oral';
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.images && data.images.length > 0) {
+            const imageInfo = data.images[0];
+            const caption = `
+Signature: ${imageInfo.signature}
+Extension: ${imageInfo.extension}
+Image ID: ${imageInfo.image_id}
+Favorites: ${imageInfo.favorites}
+Source: ${imageInfo.source}
+Width: ${imageInfo.width}
+Height: ${imageInfo.height}
+Byte Size: ${imageInfo.byte_size}
+URL: ${imageInfo.url}
+            `;
+            const imageUrl = imageInfo.url;
+
+            mufar.sendFile(m.chat, imageUrl, null, caption, m);
+        } else {
+            mufar.reply(m.chat, 'No anime images found.', m);
+        }
+    } catch (error) {
+        console.error(error);
+        mufar.reply(m.chat, 'An error occurred while fetching the data.', m);
+    }
+}
+handler.command = /^(xoral)$/i
+handler.tags = ['nsfw']
+handler.help = ['xoral']
+handler.limit = true
+export default handler

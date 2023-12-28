@@ -1,0 +1,17 @@
+// Klo mau pake, pake aja ini bkn enc cma terser aja
+
+// Klo mau pake, pake aja ini bkn enc cma terser aja
+
+let handler = async (m, { participants }) => {
+    // if (participants.map(v=>v.jid).includes(global.mufar.user.jid)) {
+    global.db.data.chats[m.chat].isBanned = true
+    m.reply('Done!')
+    // } else m.reply('Ada nomor host disini...')
+}
+handler.help = ['banchat']
+handler.tags = ['owner']
+handler.command = /^(banchat|bnc)$/i
+
+handler.owner = true
+
+export default handler
