@@ -1,0 +1,1 @@
+import{freemem as e}from"os";import{sizeFormatter as r}from"human-readable";const a=r({"std":"JEDEC","decimalPlaces":2,"keepTrailingZeroes":!1,"render":(e,r)=>`${e} ${r}B`}),m=async(r,{"mufar":m})=>m.reply(r.chat,"🔵 Free RAM: "+a(e()),r);m.command=/^ram$/i;export default m;
